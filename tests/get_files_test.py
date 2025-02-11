@@ -15,8 +15,8 @@ mocked_files = [
 ]
 
 
-# Test: Fetch all files without prefix
-def test_get_files_no_prefix():
+# Test: Fetch all files without search
+def test_get_files_no_search():
     with patch("os.walk", return_value=mocked_files):
         response = client.get("/api/v1/files")  # Call the API
 
@@ -30,10 +30,10 @@ def test_get_files_no_prefix():
         assert any("file3.log" in f for f in data["files"])
 
 
-# Test: Fetch files with a prefix
-def test_get_files_with_prefix():
+# Test: Fetch files with a search
+def test_get_files_with_search():
     with patch("os.walk", return_value=mocked_files):
-        response = client.get("/api/v1/files?prefix=subdir")  # Call API with prefix
+        response = client.get("/api/v1/files?search=subdir")  # Call API with search
 
         assert response.status_code == 200
         data = response.json()
