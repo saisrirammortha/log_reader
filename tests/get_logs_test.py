@@ -54,12 +54,12 @@ def test_get_logs_success():
         assert "ERROR: Timeout error" in data["logs"]
 
 
-# Test: Fetch logs with prefix filter
-def test_get_logs_with_prefix():
+# Test: Fetch logs with search filter
+def test_get_logs_with_search():
     with patch("os.path.exists", return_value=True), patch(
             "builtins.open", mock_open(read_data=mock_log_content)):
         response = client.get("/api/v1/logs",
-                              params={"file_name":"/var/log/app.log", "entries":5, "prefix":"ERROR"})
+                              params={"file_name":"/var/log/app.log", "entries":5, "search":"ERROR"})
         print(response.text)
         assert response.status_code == 200
         data = response.json()
