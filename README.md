@@ -18,5 +18,5 @@ There are 2 APIs
 To run the Tests of the EndPoints, 
 
 We can install the requirements using `pip install -r requirements.txt`
-Run pytest
+Run `pytest tests/`
 
