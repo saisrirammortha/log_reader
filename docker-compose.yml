@@ -7,8 +7,8 @@ services:
     ports:
       - "8000:8000"
     environment:
-      - LOG_DIRECTORY=/var/logs
+      - LOG_DIRECTORY=/var/log
     volumes:
-      - /var/log:/var/logs  # Bind mount the local code directory for easier development
+      - /var/log:/var/log
 
 

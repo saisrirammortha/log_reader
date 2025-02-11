@@ -1,5 +1,7 @@
-import sys; print('Python %s on %s' % (sys.version, sys.platform))
-sys.path.extend(['/Users/bytedance/PycharmProjects/log_reader'])
+import sys
+import os
+from pathlib import Path
+sys.path.extend([str(Path(os.path.abspath(__file__)).parent.parent)])
 import pytest
 from fastapi.testclient import TestClient
 from unittest.mock import patch
