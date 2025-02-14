@@ -16,6 +16,7 @@ router = APIRouter()
             )
 async def get_logs(file_name: str, response: Response, entries: int = 10, search: str = None, chunk_size: int = 1024):
     try:
+        file_name = os.path.abspath(file_name)
         if not file_name.startswith(LOG_DIRECTORY):
             response.status_code = status.HTTP_400_BAD_REQUEST
             return Message(message=f"File name doesn't start with {LOG_DIRECTORY}")
@@ -29,7 +30,7 @@ async def get_logs(file_name: str, response: Response, entries: int = 10, search
             size = int(f.tell())
             buffer = bytearray()
             lines = []
-            while size > 0 and len(lines) <= entries:
+            while size > 0 and len(lines) < entries:
                 size = max(0, size - chunk_size)
                 f.seek(size)
                 buffer[:0] = f.read(1024)
